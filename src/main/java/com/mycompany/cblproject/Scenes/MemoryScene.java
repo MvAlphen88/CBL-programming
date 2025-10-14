@@ -72,11 +72,11 @@ public class MemoryScene {
     }
 
     private static void loadImages() {
-        cardBacks = loadAndScaleIcon("CBLProgramming/src/main/resources/sprites/images/BacksThis.png",100,100);
+        cardBacks = loadAndScaleIcon("src/main/java/com/mycompany/resources/cardbacks/backs.png",100,100);
 
         cardFronts = new ImageIcon[12];
         for (int i = 0; i < 12; i++) {
-            String path = "CBLProgramming/src/main/resources/sprites/images/cards/" + (i + 1) + ".png";
+            String path = "src/main/java/com/mycompany/resources/cards/" + (i + 1) + ".png";
             cardFronts[i] = loadAndScaleIcon(path, 100, 100);
 
         }
