@@ -1,0 +1,59 @@
+package com.mycompany.cblproject.Scenes;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+
+
+public class GameMenu {
+
+
+    private static JPanel gamePanel;
+    private static JButton button1;
+    private static JButton button3;
+    private static JButton button2;
+
+    public static JPanel gameMenu() {
+        gamePanel = new JPanel();
+
+        JLabel info = new JLabel("Game Menu", SwingConstants.CENTER);
+        gamePanel.add(info, BorderLayout.CENTER);
+
+        button1 = new JButton("BYE!");
+        button2 = new JButton("TicTacToe");
+        button3 = new JButton("Memory");
+
+        TicTacToeScene.ticTacToePanel();
+        MemoryScene.memoryPanel();
+
+        button1.addActionListener(e -> {
+            Scene.closeApp();
+            
+        });
+
+        button2.addActionListener(e -> {
+            
+            Scene.startNewScene(TicTacToeScene.getTicTacToePanel());
+            
+        });
+
+        button3.addActionListener(e -> {
+            
+            Scene.startNewScene(MemoryScene.getMemoryPanel());
+            
+        });
+
+        gamePanel.add(button1);
+        gamePanel.add(button2);
+        gamePanel.add(button3);
+        return gamePanel;
+    }
+
+    public static JPanel getMenu() {
+        return gamePanel;
+    }
+}
