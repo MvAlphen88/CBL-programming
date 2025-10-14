@@ -27,7 +27,7 @@ public class PetWindow {
         pet.setAlwaysOnTop(true);
         pet.setBackground(new Color(0, 0, 0, 0));
         
-        petIcon = new ImageIcon("CBLProject/src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png");
+        petIcon = new ImageIcon("src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png");
 
         petImage = new JLabel(petIcon);
         
@@ -47,7 +47,7 @@ public class PetWindow {
     }
 
     private void animatePet() {
-        ImageIcon[] frames = petFrames.petSit();
+        ImageIcon[] frames = petFrames.petWalk();
         
         if (frames != null && frames.length > 0) {
             animationTimer = new Timer(50, new ActionListener() {

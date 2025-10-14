@@ -6,19 +6,19 @@ public class PetFrames {
     private ImageIcon[] frames;
 
     public ImageIcon[] petWalk() {
-        String animationString = "CBLProject/src/main/java/com/mycompany/resources/Bird/Walk/birdwalkcycle";
+        String animationString = "src/main/java/com/mycompany/resources/Bird/Walk/birdwalkcycle";
         loadFrames(27, animationString);
         return frames;
     }
 
     public ImageIcon[] petStand() {
         frames = new ImageIcon[1];
-        frames[0] = new ImageIcon("CBLProject/src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png");
+        frames[0] = new ImageIcon("src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png");
         return frames;
     }
 
     public ImageIcon[] petSit() {
-        String animationString = "CBLProject/src/main/java/com/mycompany/resources/Bird/Sit/birdsitting";
+        String animationString = "src/main/java/com/mycompany/resources/Bird/Sit/birdsitting";
         loadFrames(4, animationString);
         return frames;
     }
