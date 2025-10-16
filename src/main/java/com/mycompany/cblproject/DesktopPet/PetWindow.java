@@ -2,6 +2,7 @@ package com.mycompany.cblproject.DesktopPet;
 
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -14,16 +15,14 @@ import javax.swing.Timer;
 import com.mycompany.cblproject.Scenes.Scene;
 
 public class PetWindow {
-    private final JWindow pet = new JWindow();
-    PetFrames petFrames = new PetFrames();
-    private Timer animationTimer;
-    private JLabel petImage;
-    private ImageIcon petIcon;
-    private int currentFrame = 0;
+    private static JWindow pet = new JWindow();
+    private static PetFrames petFrames = new PetFrames();
+    private static Timer animationTimer;
+    private static JLabel petImage;
+    private static ImageIcon petIcon;
+    private static int currentFrame = 0;
 
-    public PetWindow() {
-        
-
+    public static void PetWindow() {
         pet.setAlwaysOnTop(true);
         pet.setBackground(new Color(0, 0, 0, 0));
         
@@ -46,12 +45,16 @@ public class PetWindow {
         animatePet();
     }
 
-    private void animatePet() {
+    private static void animatePet() {
         ImageIcon[] frames = petFrames.petWalk();
+        PetMovement movement = new PetMovement();
+        movement.chooseNewTarget();
         
         if (frames != null && frames.length > 0) {
             animationTimer = new Timer(50, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    
+                    movement.moveToTarget();
                     petImage.setIcon(frames[currentFrame]);
                     currentFrame = (currentFrame + 1) % frames.length;
                 }
@@ -60,7 +63,23 @@ public class PetWindow {
         }
     }
 
-    public void dispose() {
+    public static void petSetLocation(int x, int y) {
+        pet.setLocation(x, y);
+    }
+
+    public static Point petGetLocation() {
+        return pet.getLocation();
+    }
+
+    public static JWindow getPet() {
+        return pet;
+    }
+
+    public static void togglePetVisibility(boolean visible) {
+        pet.setVisible(visible);
+    }
+
+    public static void dispose() {
         if (animationTimer != null) {
             animationTimer.stop();
         }

@@ -51,18 +51,14 @@ public class Scene {
         return frame;
     }
 
-    public static void addPet(PetWindow pet) {
-        petWindow = pet;
-    }
-
     public static void toggleVisibility(boolean visible) {
         frame.setVisible(visible);
 
     }
 
     public static void closeApp() {
-        if (petWindow != null) {
-            petWindow.dispose();
+        if (PetWindow.getPet() != null) {
+            PetWindow.dispose();
         }
         if (frame != null) {
             frame.dispose();

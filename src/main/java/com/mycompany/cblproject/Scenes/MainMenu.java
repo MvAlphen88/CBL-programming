@@ -23,12 +23,11 @@ public class MainMenu {
         menu.add(info, BorderLayout.CENTER);
 
         JButton button1 = new JButton("Continue");
-        button1.addActionListener(e -> {
-            PetWindow pet = new PetWindow();
-            Scene.addPet(pet);
+        button1.addActionListener(e -> {      
             GameMenu.gameMenu();
             Scene.startNewScene(GameMenu.getMenu());
             Scene.toggleVisibility(false);
+            PetWindow.PetWindow();
         });
 
         menu.add(button1);
