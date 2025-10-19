@@ -3,34 +3,34 @@ package com.mycompany.cblproject.DesktopPet;
 import javax.swing.ImageIcon;
 
 public class PetFrames {
-    private ImageIcon[] frames;
+    private static ImageIcon[] frames;
 
-    public ImageIcon[] petWalkLeft() {
+    public static ImageIcon[] petWalkLeft() {
         String animationString = "src/main/java/com/mycompany/resources/Bird/WalkLeft/birdwalkcycle";
         loadFrames(27, animationString);
         return frames;
     }
 
-    public ImageIcon[] petWalkRight() {
+    public static ImageIcon[] petWalkRight() {
         String animationString = "src/main/java/com/mycompany/resources/Bird/WalkRight/birdwalkcycle";
         loadFrames(27, animationString);
         return frames;
     }
 
 
-    public ImageIcon[] petStand() {
+    public static ImageIcon[] petStand() {
         frames = new ImageIcon[1];
         frames[0] = new ImageIcon("src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png");
         return frames;
     }
 
-    public ImageIcon[] petSit() {
+    public static ImageIcon[] petSit() {
         String animationString = "src/main/java/com/mycompany/resources/Bird/Sit/birdsitting";
         loadFrames(4, animationString);
         return frames;
     }
 
-    private void loadFrames(int framesAmount, String animationString) {
+    private static void loadFrames(int framesAmount, String animationString) {
         frames = new ImageIcon[framesAmount];
         int currentFrame;
         for (int i = 0; i < framesAmount; i++) {

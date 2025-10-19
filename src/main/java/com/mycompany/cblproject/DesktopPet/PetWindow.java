@@ -16,13 +16,13 @@ import com.mycompany.cblproject.Scenes.Scene;
 
 public class PetWindow {
     private static JWindow pet = new JWindow();
-    private static PetFrames petFrames = new PetFrames();
     private static Timer animationTimer;
     private static JLabel petImage;
     private static ImageIcon petIcon;
     private static int currentFrame = 0;
     private static PetMovement movement;
     private static boolean petSit = false;
+    private static ImageIcon[] frames;
 
     public static void PetWindow() {
         pet.setAlwaysOnTop(true);
@@ -48,7 +48,7 @@ public class PetWindow {
     }
 
     private static void animatePet() {
-        ImageIcon[] frames = petFrames.petWalkLeft();
+        setAnimation(PetFrames.petWalkLeft());
         movement = new PetMovement();
         movement.chooseNewTarget();
         
@@ -63,6 +63,10 @@ public class PetWindow {
             });
             animationTimer.start();
         }
+    }
+
+    public static void setAnimation(ImageIcon[] newFrames) {
+        frames = newFrames;
     }
 
     public static void selectMovement() {

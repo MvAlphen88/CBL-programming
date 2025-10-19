@@ -20,6 +20,11 @@ public class PetMovement {
         targetX = random.nextInt(maxX);
         targetY = random.nextInt(maxY);
         
+        if (targetX > PetWindow.petGetLocation().x) {
+            PetWindow.setAnimation(PetFrames.petWalkRight());
+        } else {
+            PetWindow.setAnimation(PetFrames.petWalkLeft());
+        }
     }
 
     public void moveToTarget() {
@@ -42,12 +47,15 @@ public class PetMovement {
         int dx = targetX - x;
         int dy = targetY - y;
         
+
         if (Math.abs(dx) > moveSpeed) {
             dx = moveSpeed * Integer.signum(dx);
         }
         if (Math.abs(dy) > moveSpeed) {
             dy = moveSpeed * Integer.signum(dy);
         }
+
+        
 
         PetWindow.petSetLocation(x + dx, y + dy);
     }

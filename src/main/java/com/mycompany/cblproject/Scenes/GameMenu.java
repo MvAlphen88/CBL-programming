@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.mycompany.cblproject.DesktopPet.PetFrames;
+import com.mycompany.cblproject.DesktopPet.PetWindow;
+
 
 
 public class GameMenu {
@@ -56,6 +59,7 @@ public class GameMenu {
         gamePanel.add(button1);
         gamePanel.add(button2);
         gamePanel.add(button3);
+        gamePanel.add(button4);
         return gamePanel;
     }
 
