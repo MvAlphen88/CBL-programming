@@ -16,6 +16,7 @@ public class GameMenu {
     private static JButton button1;
     private static JButton button3;
     private static JButton button2;
+    private static JButton button4;
 
     public static JPanel gameMenu() {
         gamePanel = new JPanel();
@@ -26,6 +27,7 @@ public class GameMenu {
         button1 = new JButton("BYE!");
         button2 = new JButton("TicTacToe");
         button3 = new JButton("Memory");
+        button4 = new JButton("Corner");
 
         TicTacToeScene.ticTacToePanel();
         MemoryScene.memoryPanel();
@@ -44,6 +46,10 @@ public class GameMenu {
         button3.addActionListener(e -> {
             
             Scene.startNewScene(MemoryScene.getMemoryPanel());
+            
+        });
+
+        button4.addActionListener(e -> {
             
         });
 

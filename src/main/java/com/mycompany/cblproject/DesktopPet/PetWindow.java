@@ -21,6 +21,8 @@ public class PetWindow {
     private static JLabel petImage;
     private static ImageIcon petIcon;
     private static int currentFrame = 0;
+    private static PetMovement movement;
+    private static boolean petSit = false;
 
     public static void PetWindow() {
         pet.setAlwaysOnTop(true);
@@ -46,20 +48,26 @@ public class PetWindow {
     }
 
     private static void animatePet() {
-        ImageIcon[] frames = petFrames.petWalk();
-        PetMovement movement = new PetMovement();
+        ImageIcon[] frames = petFrames.petWalkLeft();
+        movement = new PetMovement();
         movement.chooseNewTarget();
         
         if (frames != null && frames.length > 0) {
             animationTimer = new Timer(50, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    selectMovement();
                     
-                    movement.moveToTarget();
                     petImage.setIcon(frames[currentFrame]);
                     currentFrame = (currentFrame + 1) % frames.length;
                 }
             });
             animationTimer.start();
+        }
+    }
+
+    public static void selectMovement() {
+        if(!petSit) {
+            movement.moveToTarget();
         }
     }
 

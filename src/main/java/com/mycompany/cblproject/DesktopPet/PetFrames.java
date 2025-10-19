@@ -5,11 +5,18 @@ import javax.swing.ImageIcon;
 public class PetFrames {
     private ImageIcon[] frames;
 
-    public ImageIcon[] petWalk() {
-        String animationString = "src/main/java/com/mycompany/resources/Bird/Walk/birdwalkcycle";
+    public ImageIcon[] petWalkLeft() {
+        String animationString = "src/main/java/com/mycompany/resources/Bird/WalkLeft/birdwalkcycle";
         loadFrames(27, animationString);
         return frames;
     }
+
+    public ImageIcon[] petWalkRight() {
+        String animationString = "src/main/java/com/mycompany/resources/Bird/WalkRight/birdwalkcycle";
+        loadFrames(27, animationString);
+        return frames;
+    }
+
 
     public ImageIcon[] petStand() {
         frames = new ImageIcon[1];
