@@ -96,7 +96,8 @@ public class MemoryScene {
         List<Integer> values = new ArrayList<>();
         for (int i = 1; i <= totalCards / 2; i++){
             values.add(i);
-            values.add(i); // Because each value appears twice
+            values.add(i); 
+            // Because each value appears twice
         }
 
         //Randomizing every game at the start
