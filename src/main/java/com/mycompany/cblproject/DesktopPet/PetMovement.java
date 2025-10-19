@@ -12,6 +12,7 @@ public class PetMovement {
     private Random random = new Random();
     private int maxX;
     private int maxY;
+    private boolean currentlySit;
 
     public void chooseNewTarget() {
         maxX = screensize.width - PetWindow.getPet().getWidth();
@@ -20,6 +21,31 @@ public class PetMovement {
         targetX = random.nextInt(maxX);
         targetY = random.nextInt(maxY);
         
+        mirrorAnimation();
+
+    }
+
+    public void moveToSit() {
+        if(currentlySit) {
+            return;
+        }
+
+        targetX = screensize.width - PetWindow.getPet().getWidth();
+        targetY = screensize.height - PetWindow.getPet().getHeight();
+        int x = PetWindow.petGetLocation().x;
+        int y = PetWindow.petGetLocation().y;
+
+        mirrorAnimation();
+
+        if (x == targetX && y == targetY) {
+            PetWindow.setAnimation(PetFrames.petSit());
+        } else {
+            moveStep();
+        }
+
+    }
+
+    private void mirrorAnimation() {
         if (targetX > PetWindow.petGetLocation().x) {
             PetWindow.setAnimation(PetFrames.petWalkRight());
         } else {

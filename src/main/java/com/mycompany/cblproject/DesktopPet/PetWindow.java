@@ -2,7 +2,9 @@ package com.mycompany.cblproject.DesktopPet;
 
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -11,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 import javax.swing.Timer;
+
 
 import com.mycompany.cblproject.Scenes.Scene;
 
@@ -23,6 +26,7 @@ public class PetWindow {
     private static PetMovement movement;
     private static boolean petSit = false;
     private static ImageIcon[] frames;
+    private static final Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static void PetWindow() {
         pet.setAlwaysOnTop(true);
@@ -56,6 +60,9 @@ public class PetWindow {
             animationTimer = new Timer(50, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     selectMovement();
+                    if (currentFrame >= frames.length) {
+                        currentFrame = 0;
+                    }
                     
                     petImage.setIcon(frames[currentFrame]);
                     currentFrame = (currentFrame + 1) % frames.length;
@@ -70,8 +77,10 @@ public class PetWindow {
     }
 
     public static void selectMovement() {
-        if(!petSit) {
+        if (!petSit) {
             movement.moveToTarget();
+        } else {
+            movement.moveToSit();
         }
     }
 
@@ -81,6 +90,10 @@ public class PetWindow {
 
     public static Point petGetLocation() {
         return pet.getLocation();
+    }
+
+    public static void setPetSit(boolean petSitToggle) {
+        petSit = petSitToggle;
     }
 
     public static JWindow getPet() {

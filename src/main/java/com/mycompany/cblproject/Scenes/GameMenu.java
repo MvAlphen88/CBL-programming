@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.mycompany.cblproject.DesktopPet.PetFrames;
+import com.mycompany.cblproject.DesktopPet.PetMovement;
 import com.mycompany.cblproject.DesktopPet.PetWindow;
 
 
@@ -20,6 +21,7 @@ public class GameMenu {
     private static JButton button3;
     private static JButton button2;
     private static JButton button4;
+    private static boolean petSit;
 
     public static JPanel gameMenu() {
         gamePanel = new JPanel();
@@ -53,7 +55,12 @@ public class GameMenu {
         });
 
         button4.addActionListener(e -> {
-            
+            if (petSit) {
+                petSit = false;
+            } else {
+                petSit = true;
+            }
+            PetWindow.setPetSit(petSit);
         });
 
         gamePanel.add(button1);
