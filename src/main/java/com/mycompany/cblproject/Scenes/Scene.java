@@ -1,25 +1,18 @@
 package com.mycompany.cblproject.Scenes;
 
-
-
+import com.mycompany.cblproject.DesktopPet.PetWindow;
 import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JWindow;
-
-import com.mycompany.cblproject.DesktopPet.PetWindow;
-
-
 
 /**
  * Class that creates the JFrame used. It can be filled with different JPanels.
+ * @author Marte
  */
 public class Scene {
 
     private static JFrame frame;
     private static JPanel currentScene;
-    private static PetWindow petWindow;
 
     /**
      * Creates a new JFrame.
@@ -33,6 +26,11 @@ public class Scene {
         frame.setLayout(new BorderLayout());
     }
 
+    /**
+     * Method that starts a new scene. It removes the current JPanel and replaces it
+     * with a new one.
+     * @param newScene The JPanel for the new scene.
+     */
     public static void startNewScene(JPanel newScene) {
         stopCurrentScene();
         frame.add(newScene);
@@ -51,11 +49,9 @@ public class Scene {
         return frame;
     }
 
-    public static void toggleVisibility(boolean visible) {
-        frame.setVisible(visible);
-
-    }
-
+    /**
+     * Method that closes the application.
+     */
     public static void closeApp() {
         if (PetWindow.getPet() != null) {
             PetWindow.dispose();

@@ -4,6 +4,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Random;
 
+/**
+ * Class that manages the pet movement.
+ * @author Marte
+ */
 public class PetMovement {
     private int targetX;
     private int targetY;
@@ -14,6 +18,9 @@ public class PetMovement {
     private int maxY;
     private boolean currentlySit;
 
+    /**
+     * Method that chooses a random new target on the screen for the bird to walk to.
+     */
     public void chooseNewTarget() {
         maxX = screensize.width - PetWindow.getPet().getWidth();
         maxY = screensize.height - PetWindow.getPet().getHeight();
@@ -25,8 +32,11 @@ public class PetMovement {
 
     }
 
+    /**
+     * Method that moves the bird to its sitting location and sets the animation to sit.
+     */
     public void moveToSit() {
-        if(currentlySit) {
+        if (currentlySit) {
             return;
         }
 
@@ -53,8 +63,10 @@ public class PetMovement {
         }
     }
 
+    /**
+     * Method that moves pet to the targetX and targetY with fixed movement speed.
+     */
     public void moveToTarget() {
-        
         int x = PetWindow.petGetLocation().x;
         int y = PetWindow.petGetLocation().y;
 
@@ -64,15 +76,13 @@ public class PetMovement {
         }
 
         moveStep();
-        
     }
 
-    public void moveStep() {
+    private void moveStep() {
         int x = PetWindow.petGetLocation().x;
         int y = PetWindow.petGetLocation().y;
         int dx = targetX - x;
         int dy = targetY - y;
-        
 
         if (Math.abs(dx) > moveSpeed) {
             dx = moveSpeed * Integer.signum(dx);
@@ -81,20 +91,7 @@ public class PetMovement {
             dy = moveSpeed * Integer.signum(dy);
         }
 
-        
-
         PetWindow.petSetLocation(x + dx, y + dy);
     }
 
-    public void petSit() {
-        targetX = maxX;
-        targetY = maxY;
-        int x = PetWindow.petGetLocation().x;
-        int y = PetWindow.petGetLocation().y;
-
-        if (x == targetX && y == targetY) {
-            
-            return;
-        }
-    }
 }

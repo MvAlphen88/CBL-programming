@@ -1,28 +1,28 @@
 package com.mycompany.cblproject.Scenes;
 
+import com.mycompany.cblproject.DesktopPet.PetWindow;
 import java.awt.BorderLayout;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.mycompany.cblproject.DesktopPet.PetFrames;
-import com.mycompany.cblproject.DesktopPet.PetMovement;
-import com.mycompany.cblproject.DesktopPet.PetWindow;
-
-
-
+/**
+ * Class that creates and controls the Game menu.
+ * @author Marte
+ */
 public class GameMenu {
-
-
     private static JPanel gamePanel;
     private static JButton button1;
     private static JButton button3;
     private static JButton button2;
     private static JButton button4;
     private static boolean petSit;
-
+    
+    /**
+     * Method that creates and returns a the menu containing the games.
+     * @return JPanel of the game menu
+     */
     public static JPanel gameMenu() {
         gamePanel = new JPanel();
 

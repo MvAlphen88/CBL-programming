@@ -1,6 +1,6 @@
 package com.mycompany.cblproject.DesktopPet;
 
-
+import com.mycompany.cblproject.Scenes.Scene;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -14,9 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JWindow;
 import javax.swing.Timer;
 
-
-import com.mycompany.cblproject.Scenes.Scene;
-
+/**
+ * Class that is in control of the pets JWindow.
+ * @author Marte
+ */
 public class PetWindow {
     private static JWindow pet = new JWindow();
     private static Timer animationTimer;
@@ -26,20 +27,20 @@ public class PetWindow {
     private static PetMovement movement;
     private static boolean petSit = false;
     private static ImageIcon[] frames;
-    private static final Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+    private static final Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public static void PetWindow() {
+    /**
+     * Method that initializes the Pet JWindow.
+     */
+    public static void petWindow() {
         pet.setAlwaysOnTop(true);
         pet.setBackground(new Color(0, 0, 0, 0));
-        
-        petIcon = new ImageIcon("src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png");
-
+        String imageLocation = "src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png";
+        petIcon = new ImageIcon(imageLocation);
         petImage = new JLabel(petIcon);
-        
         pet.add(petImage);
         pet.pack();
-
-        pet.setLocation(800, 600);
+        pet.setLocation(SCREENSIZE.width, 600);
         pet.setVisible(true);
 
         pet.addMouseListener(new MouseAdapter() {
@@ -76,6 +77,9 @@ public class PetWindow {
         frames = newFrames;
     }
 
+    /**
+     * Method that selects what type of movement the pet should do.
+     */
     public static void selectMovement() {
         if (!petSit) {
             movement.moveToTarget();
@@ -104,6 +108,9 @@ public class PetWindow {
         pet.setVisible(visible);
     }
 
+    /**
+     * Method that disposes of the timer and pet when closing the application.
+     */
     public static void dispose() {
         if (animationTimer != null) {
             animationTimer.stop();
