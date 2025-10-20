@@ -1,11 +1,8 @@
 package com.mycompany.cblproject.Scenes;
 
-
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,8 +25,14 @@ public class TicTacToeScene {
     public static void ticTacToePanel() {
         ticTacToePanel = new JPanel(new BorderLayout());
 
-        xs = new ImageIcon(TicTacToeScene.class.getResource("/com/mycompany/resources/Xs_and_Os/redX.png"));
-        os = new ImageIcon(TicTacToeScene.class.getResource("/com/mycompany/resources/Xs_and_Os/blueO.png"));
+        ImageIcon raw_xs = new ImageIcon(TicTacToeScene.class.getResource("/com/mycompany/resources/Xs_and_Os/redX.png"));
+        ImageIcon raw_os = new ImageIcon(TicTacToeScene.class.getResource("/com/mycompany/resources/Xs_and_Os/blueO.png"));
+
+        Image scaled_xs = raw_xs.getImage().getScaledInstance(80,80, Image.SCALE_SMOOTH);
+        Image scaled_os = raw_os.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+
+        xs = new ImageIcon(scaled_xs);
+        os = new ImageIcon(scaled_os);
 
 
         JLabel info = new JLabel("This is Tic-Tac-Toe. Will you be able to beat the computer?", SwingConstants.CENTER);
@@ -116,6 +119,38 @@ public class TicTacToeScene {
 
         }
 
+        for (int[] cell: emptyCells) {
+            int r = cell[0]; 
+            int c = cell[1];
+            clickableGrid[r][c].setIcon(os);
+
+            if(checkWin(os)) {
+                clickableGrid[r][c].setEnabled(false);
+                gameStatus.setText("Computer has won!");
+                endGame();
+                return;
+            }
+
+            clickableGrid[r][c].setIcon(null);
+
+        }
+
+        for(int[] cell: emptyCells){
+            int r = cell[0];
+            int c = cell[1];
+            clickableGrid[r][c].setIcon(xs);
+
+            if(checkWin(xs)){
+                clickableGrid[r][c].setIcon(os);
+                clickableGrid[r][c].setEnabled(false);
+                gameStatus.setText("Your turn, X!");
+                return;
+            }
+
+            clickableGrid[r][c].setIcon(null);
+
+        }
+
         int[] move = emptyCells.get(randomize.nextInt(emptyCells.size()));
         int row = move[0];
         int column = move[1];
@@ -124,7 +159,7 @@ public class TicTacToeScene {
 
        
         if (checkWin(os)) {
-            gameStatus.setText("Computer wins!");
+            gameStatus.setText("Computer has won!");
             endGame();
         } else if (fullBoard()) {
             gameStatus.setText("It's a draw.");
