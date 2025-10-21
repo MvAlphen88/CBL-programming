@@ -8,31 +8,25 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.Timer;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-
+import javax.swing.Timer;
 
 /**
- * Class that creates Memory Scene
- * 
+ * Class that creates and controls the memory game.
+ * @author Camila
  */
-
-
-
 public class MemoryScene {
     private static JPanel memoryPanel;
 
     // Setting the game up
-    private static final int rows = 4;
-    private static final int columns = 4;
-    private static final int totalCards = rows * columns;
+    private static final int ROWS = 4;
+    private static final int COLUMNS = 4;
+    private static final int TOTAL_CARDS = ROWS * COLUMNS;
 
     private static JButton[] cards;
     private static Integer[] cardValues;
@@ -44,14 +38,16 @@ public class MemoryScene {
     private static boolean waiting = false;
     private static int matchesDone = 0;
 
-
+    /** 
+     * Method that creates the panel containing the memory game.
+     */
     public static void memoryPanel() {
         memoryPanel = new JPanel(new BorderLayout (10,10));
-
-        JLabel title = new JLabel("This is a memory game. Match all 12 pairs!", SwingConstants.CENTER);
+        String titleString = "This is a memory game. Match all 12 pairs!";
+        JLabel title = new JLabel(titleString, SwingConstants.CENTER);
         memoryPanel.add(title, BorderLayout.NORTH);
 
-        JPanel gridPanel = new JPanel(new GridLayout(rows, columns, 5, 5)) {
+        JPanel gridPanel = new JPanel(new GridLayout(ROWS, COLUMNS, 5, 5)) {
             @Override
             public Dimension getPreferredSize() {
                 return new Dimension(660, 660);
@@ -72,7 +68,8 @@ public class MemoryScene {
     }
 
     private static void loadImages() {
-        cardBacks = loadAndScaleIcon("src/main/java/com/mycompany/resources/cardbacks/backs.png",100,100);
+        String cardBackPath = "src/main/java/com/mycompany/resources/cardbacks/backs.png";
+        cardBacks = loadAndScaleIcon(cardBackPath, 100, 100);
 
         cardFronts = new ImageIcon[12];
         for (int i = 0; i < 12; i++) {
@@ -94,7 +91,7 @@ public class MemoryScene {
 
     private static Integer[] generateCardValues() {
         List<Integer> values = new ArrayList<>();
-        for (int i = 1; i <= totalCards / 2; i++){
+        for (int i = 1; i <= TOTAL_CARDS / 2; i++){
             values.add(i);
             values.add(i); 
             // Because each value appears twice
@@ -116,16 +113,16 @@ public class MemoryScene {
         secondFlipped = null;
         waiting = false;
 
-        cards = new JButton[totalCards];
+        cards = new JButton[TOTAL_CARDS];
         cardValues = generateCardValues();
 
-        for (int i = 0; i < totalCards; i++){
+        for (int i = 0; i < TOTAL_CARDS; i++){
             JButton cardButton = new JButton();
-            cardButton.setPreferredSize(new Dimension(100,100));
+            cardButton.setPreferredSize(new Dimension(100, 100));
             cardButton.setIcon(cardBacks);
             cardButton.setBackground(Color.WHITE);
             cardButton.putClientProperty("index", i);
-
+            
             cardButton.addActionListener(e -> onCardClick(cardButton));
             cards[i] = cardButton;
             gridPanel.add(cardButton);
@@ -150,11 +147,13 @@ public class MemoryScene {
     }
 
     private static void onCardClick(JButton cardButton) {
-        if (waiting || cardButton == firstFlipped || cardButton == secondFlipped) return;
+        if (waiting || cardButton == firstFlipped || cardButton == secondFlipped) {
+            return;
+        } 
 
         int index = (int) cardButton.getClientProperty("index");
         int value = cardValues[index];
-        cardButton.setIcon(cardFronts[value -1]);
+        cardButton.setIcon(cardFronts[value - 1]);
 
         if (firstFlipped == null) {
             firstFlipped = cardButton;
@@ -162,8 +161,6 @@ public class MemoryScene {
         } else if (secondFlipped == null) {
             secondFlipped = cardButton;
             checkMatch();
-
-
         }
 
     }
@@ -180,12 +177,15 @@ public class MemoryScene {
             matchesDone++;
             resetSelection();
 
-            if (matchesDone == totalCards/2){
-                JOptionPane.showMessageDialog(memoryPanel, "Yay! You successfully matched all the pairs!");
+            
+
+            if (matchesDone == TOTAL_CARDS / 2) {
+                String victoryMessage = "Yay! You successfully matched all the pairs!";
+                JOptionPane.showMessageDialog(memoryPanel, victoryMessage);
             }
 
 
-        } else{
+        } else {
             waiting = true;
             Timer timer = new Timer(1000, e -> {
                 firstFlipped.setIcon(cardBacks);
@@ -204,8 +204,6 @@ public class MemoryScene {
     private static void resetSelection() {
         firstFlipped = null;
         secondFlipped = null;
-    
-
     }
 
     public static JPanel getMemoryPanel() {
