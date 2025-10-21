@@ -2,28 +2,55 @@ package com.mycompany.cblproject.DesktopPet;
 
 import javax.swing.ImageIcon;
 
+/**
+ * Class that contains all the animation frames.
+ * @author Marte
+ */
 public class PetFrames {
-    private ImageIcon[] frames;
+    private static ImageIcon[] frames;
+    private static String fileLocation = "src/main/java/com/mycompany/resources/";
 
-    public ImageIcon[] petWalk() {
-        String animationString = "src/main/java/com/mycompany/resources/Bird/Walk/birdwalkcycle";
+    /**
+     * Method that returns the frames for the pets left walkcycle.
+     * @return array of ImageIcons containing frames.
+     */
+    public static ImageIcon[] petWalkLeft() {
+        String animationString = fileLocation + "Bird/WalkLeft/birdwalkcycle";
         loadFrames(27, animationString);
         return frames;
     }
 
-    public ImageIcon[] petStand() {
+    /**
+     * Method that returns the frames for the pets right walkcycle.
+     * @return array of ImageIcons containing frames.
+     */
+    public static ImageIcon[] petWalkRight() {
+        String animationString = fileLocation + "Bird/WalkRight/birdwalkcycle";
+        loadFrames(27, animationString);
+        return frames;
+    }
+
+    /**
+     * Method that returns the frame for the pet standing.
+     * @return array of ImageIcons containing frames.
+     */
+    public static ImageIcon[] petStand() {
         frames = new ImageIcon[1];
-        frames[0] = new ImageIcon("src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png");
+        frames[0] = new ImageIcon(fileLocation + "Bird/Stand/birdstanding.png");
         return frames;
     }
 
-    public ImageIcon[] petSit() {
-        String animationString = "src/main/java/com/mycompany/resources/Bird/Sit/birdsitting";
-        loadFrames(4, animationString);
+    /**
+     * Method that returns the frames for the pet sitting.
+     * @return array of ImageIcons containing frames.
+     */
+    public static ImageIcon[] petSit() {
+        String animationString = fileLocation + "Bird/Sit/birdsitting";
+        loadFrames(8, animationString);
         return frames;
     }
 
-    private void loadFrames(int framesAmount, String animationString) {
+    private static void loadFrames(int framesAmount, String animationString) {
         frames = new ImageIcon[framesAmount];
         int currentFrame;
         for (int i = 0; i < framesAmount; i++) {

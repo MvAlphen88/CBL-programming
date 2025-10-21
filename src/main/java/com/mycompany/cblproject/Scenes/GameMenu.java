@@ -1,22 +1,28 @@
 package com.mycompany.cblproject.Scenes;
 
+import com.mycompany.cblproject.DesktopPet.PetWindow;
 import java.awt.BorderLayout;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-
-
+/**
+ * Class that creates and controls the Game menu.
+ * @author Marte
+ */
 public class GameMenu {
-
-
     private static JPanel gamePanel;
     private static JButton button1;
     private static JButton button3;
     private static JButton button2;
-
+    private static JButton button4;
+    private static boolean petSit;
+    
+    /**
+     * Method that creates and returns a the menu containing the games.
+     * @return JPanel of the game menu
+     */
     public static JPanel gameMenu() {
         gamePanel = new JPanel();
 
@@ -26,6 +32,7 @@ public class GameMenu {
         button1 = new JButton("BYE!");
         button2 = new JButton("TicTacToe");
         button3 = new JButton("Memory");
+        button4 = new JButton("Corner");
 
         TicTacToeScene.ticTacToePanel();
         MemoryScene.memoryPanel();
@@ -47,9 +54,19 @@ public class GameMenu {
             
         });
 
+        button4.addActionListener(e -> {
+            if (petSit) {
+                petSit = false;
+            } else {
+                petSit = true;
+            }
+            PetWindow.setPetSit(petSit);
+        });
+
         gamePanel.add(button1);
         gamePanel.add(button2);
         gamePanel.add(button3);
+        gamePanel.add(button4);
         return gamePanel;
     }
 
