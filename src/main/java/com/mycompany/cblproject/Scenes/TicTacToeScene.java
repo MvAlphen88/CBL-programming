@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -14,7 +15,6 @@ public class TicTacToeScene {
 
     private static JPanel ticTacToePanel;
     private static JButton[][] clickableGrid = new JButton[3][3];
-    private static JLabel gameStatus;
     private static boolean finished = false;
     private static Random randomize = new Random();
     
@@ -62,8 +62,6 @@ public class TicTacToeScene {
         ticTacToePanel.add(boardGrid, BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        gameStatus = new JLabel("Your turn, X!", SwingConstants.CENTER);
-        bottomPanel.add(gameStatus, BorderLayout.CENTER);
 
         JButton menuButton = new JButton("Return to menu!");
         menuButton.addActionListener(e -> Scene.startNewScene(GameMenu.getMenu()));
@@ -80,20 +78,21 @@ public class TicTacToeScene {
         }
 
         clickableGrid[row][column].setIcon(xs);
-        clickableGrid[row][column].setEnabled(false);
+    
 
         if(checkWin(xs)) {
-            gameStatus.setText("You have won!");
-            endGame();
+            showEndMessage("You have won!");
             return;
 
         } else if (fullBoard()) {
-            gameStatus.setText("It's a draw.");
-            endGame();
+            showEndMessage("It's a draw.");
             return;
         }
 
-        computerMoves();
+        new javax.swing.Timer(700, e-> {
+            computerMoves();
+            ((javax.swing.Timer) e.getSource()).stop();
+        }).start();
 
     }
 
@@ -125,9 +124,7 @@ public class TicTacToeScene {
             clickableGrid[r][c].setIcon(os);
 
             if(checkWin(os)) {
-                clickableGrid[r][c].setEnabled(false);
-                gameStatus.setText("Computer has won!");
-                endGame();
+                showEndMessage("Sorry, the computer has won!");
                 return;
             }
 
@@ -142,8 +139,6 @@ public class TicTacToeScene {
 
             if(checkWin(xs)){
                 clickableGrid[r][c].setIcon(os);
-                clickableGrid[r][c].setEnabled(false);
-                gameStatus.setText("Your turn, X!");
                 return;
             }
 
@@ -159,17 +154,28 @@ public class TicTacToeScene {
 
        
         if (checkWin(os)) {
-            gameStatus.setText("Computer has won!");
-            endGame();
+            showEndMessage("Computer has won!");
         } else if (fullBoard()) {
-            gameStatus.setText("It's a draw.");
-            endGame();
-        } else {
-            gameStatus.setText("Your turn, X!");
+            showEndMessage("It's a draw.");
         }
     }
 
+    private static void showEndMessage(String message) {
+        finished = true;
 
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++) {
+                clickableGrid[i][j].setEnabled(false);
+
+            }
+        }
+
+       
+        JOptionPane.showMessageDialog(ticTacToePanel, message, "Game over!", JOptionPane.INFORMATION_MESSAGE);
+
+        resetGame();
+
+    }
         
 
 
@@ -219,17 +225,18 @@ public class TicTacToeScene {
 
     }
 
-    private static void endGame() {
-        finished = true;
+    private static void resetGame() {
+        finished = false;
 
-        for (int i =0; i < 3; i++){
-            for (int j =0; j < 3; j++) {
-                clickableGrid[i][j].setEnabled(false);
-
-            }
-         }
-
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                clickableGrid[i][j].setIcon(null);
+                clickableGrid[i][j].setEnabled(true);
+        }
     }
+}
+
+
 
 
     public static JPanel getTicTacToePanel() {
