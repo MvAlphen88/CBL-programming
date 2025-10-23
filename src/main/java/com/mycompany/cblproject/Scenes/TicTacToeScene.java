@@ -99,74 +99,84 @@ public class TicTacToeScene {
 
     }
 
+
     private static void computerMoves() {
         
         if (finished) {
             return;
         }
         
-        List<int[]> emptyCells = new ArrayList<>();
-            
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (clickableGrid[i][j].getIcon() == null) {
-                    emptyCells.add(new int[]{i, j});
-                }
-
-            }
-        }
-            
+        // Look for any empty cells,  and if the list is empty there are no moves left
+        List<int[]> emptyCells = getEmptyCells();   
         if (emptyCells.isEmpty()) {
             return;
 
         }
 
-        for (int[] cell: emptyCells) {
-            int r = cell[0]; 
-            int c = cell[1];
-            clickableGrid[r][c].setIcon(os);
-
-            if (checkWin(os)) {
-                showEndMessage("Sorry, the computer has won!");
-                return;
-            }
-
-            clickableGrid[r][c].setIcon(null);
+        int[] winningMove = findingBestMove(emptyCells, os);
+        if (winningMove != null) {
+            makeMove(winningMove, os, "Sorry, the computer has won!");
+            return;
 
         }
 
-        for (int[] cell: emptyCells) {
+        int[] blockPlayerMove = findingBestMove(emptyCells, xs);
+        if (blockPlayerMove != null) {
+            makeMove(blockPlayerMove, os, null);
+            return;
+
+        }
+
+        int[] randomMove = emptyCells.get(randomize.nextInt(emptyCells.size()));
+        makeMove(randomMove, os, null);
+
+        if (checkWin(os)) {
+            showEndMessage("Sorry, the computer has won!");
+
+        } else if (fullBoard()) {
+            showEndMessage("It's a draw!");
+
+        }
+
+    }
+
+    private static int[] findingBestMove(List<int[]> emptyCells, ImageIcon testIcon) {
+        
+        for (int[] cell : emptyCells) {
             int r = cell[0];
             int c = cell[1];
-            clickableGrid[r][c].setIcon(xs);
 
-            if (checkWin(xs)) {
-                clickableGrid[r][c].setIcon(os);
-                return;
-            }
+            //Check whether placing an icon would cause a win, and if so, place there
 
+            clickableGrid[r][c].setIcon(testIcon);
+            boolean win = checkWin(testIcon);
             clickableGrid[r][c].setIcon(null);
 
+            if (win) {
+                return cell;
+
+            } 
+
         }
+        return null; 
 
-        int[] move = emptyCells.get(randomize.nextInt(emptyCells.size()));
-        int row = move[0];
-        int column = move[1];
+    }
 
-        clickableGrid[row][column].setIcon(os);
+    private static void makeMove(int[] move, ImageIcon icon, String endMessage) {
+        int r = move[0];
+        int c = move[1];
+        clickableGrid[r][c].setIcon(icon);
 
-       
-        if (checkWin(os)) {
-            showEndMessage("Computer has won!");
-        } else if (fullBoard()) {
-            showEndMessage("It's a draw.");
+        if (endMessage != null) {
+            showEndMessage(endMessage);
+
         }
     }
 
     private static void showEndMessage(String message) {
         finished = true;
 
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 clickableGrid[i][j].setEnabled(false);
             }
@@ -188,25 +198,34 @@ public class TicTacToeScene {
         // Checking for a win in the rows and columns
 
         for (int i = 0; i < 3; i++) {
-            if (sameIcon(clickableGrid[i][0], clickableGrid[i][1], clickableGrid[i][2], icon)) {
+            if (rowWin(i, icon) || colWin(i, icon)) {
                 return true;
-            }
-            if (sameIcon(clickableGrid[0][i], clickableGrid[1][i], clickableGrid[2][i], icon)) {
-                return true;
+
             }
         }
 
-        //Checking for a win diagonally
+        // or diagonally
 
-        if (sameIcon(clickableGrid[0][0], clickableGrid[1][1], clickableGrid[2][2], icon)) {
-            return true;
-        }
-        if (sameIcon(clickableGrid[0][2], clickableGrid[1][1], clickableGrid[2][0], icon)) {
-            return true;
-        }
-
-        return false;
+        return diagWin(icon);
     }
+
+    // Methods checking winning combinations of icons
+
+    private static boolean rowWin(int row, ImageIcon icon) {
+        return sameIcon(clickableGrid[row][0], clickableGrid[row][1], clickableGrid[row][2], icon);
+
+    }
+
+    private static boolean colWin(int col, ImageIcon icon) {
+        return sameIcon(clickableGrid[0][col], clickableGrid[1][col], clickableGrid[2][col], icon);
+
+    }
+
+    private static boolean diagWin(ImageIcon icon) {
+        return sameIcon(clickableGrid[0][0], clickableGrid[1][1], clickableGrid[2][2], icon)
+            || sameIcon(clickableGrid[0][2], clickableGrid[1][1], clickableGrid[2][0], icon);
+    }
+
 
     private static boolean sameIcon(JButton a, JButton b, JButton c, ImageIcon icon) {
         return a.getIcon() == icon && b.getIcon() == icon && c.getIcon() == icon;
