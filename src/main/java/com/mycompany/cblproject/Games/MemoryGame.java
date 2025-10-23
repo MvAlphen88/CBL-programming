@@ -1,11 +1,16 @@
 package com.mycompany.cblproject.Games;
 
-import javax.swing.*;
-import javax.swing.Timer;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class MemoryGame {
     private final int ROWS = 4;
@@ -28,7 +33,7 @@ public class MemoryGame {
         JPanel gridPanel = new JPanel(new GridLayout(ROWS, COLUMNS, 5, 5)) {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(660, 660);
+                return new Dimension(415, 415);
             }
         };
 
@@ -76,7 +81,7 @@ public class MemoryGame {
         ArrayList<Integer> values = new ArrayList<>();
         for (int i = 1; i <= TOTAL_CARDS / 2; i++) {
             values.add(i);
-            values.add(i); // each pair appears twice
+            values.add(i);
         }
         Collections.shuffle(values);
         return values.toArray(new Integer[0]);

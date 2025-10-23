@@ -19,7 +19,7 @@ public class Scene {
      */
     public static void createScene() {
         frame = new JFrame();
-        frame.setSize(800, 600);
+        frame.setSize(800, 700);
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true); // 

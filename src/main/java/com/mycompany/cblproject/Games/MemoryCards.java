@@ -1,9 +1,14 @@
 package com.mycompany.cblproject.Games;
 
 import java.awt.Dimension;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Class that creates the cards for the memory game.
+ * @author Camila & Marte
+ */
 public class MemoryCards {
     private int value;
     private JButton cardButton;
@@ -25,7 +30,13 @@ public class MemoryCards {
 
         cardButton = new JButton();
         cardButton.setIcon(backImage);
-        cardButton.setPreferredSize(new Dimension(100, 100));
+        cardButton.setBorderPainted(false);
+        cardButton.setContentAreaFilled(false);
+        cardButton.setFocusPainted(false);
+        cardButton.setOpaque(false);
+
+        cardButton.setMaximumSize(new Dimension(100, 100));
+        cardButton.setBorder(BorderFactory.createEmptyBorder());
     }
 
     public JButton getButton() {
