@@ -110,26 +110,35 @@ public class TicTacToeScene {
         List<int[]> emptyCells = getEmptyCells();   
         if (emptyCells.isEmpty()) {
             return;
-
         }
 
-        int[] winningMove = findingBestMove(emptyCells, os);
-        if (winningMove != null) {
-            makeMove(winningMove, os, "Sorry, the computer has won!");
+        if (tryWinningMove(emptyCells)) {
             return;
-
         }
 
-        int[] blockPlayerMove = findingBestMove(emptyCells, xs);
-        if (blockPlayerMove != null) {
-            makeMove(blockPlayerMove, os, null);
+        if (tryBlockingMove(emptyCells)) {
             return;
-
         }
 
-        int[] randomMove = emptyCells.get(randomize.nextInt(emptyCells.size()));
-        makeMove(randomMove, os, null);
+        makeRandomMove(emptyCells);
 
+    }
+
+    private static boolean tryWinningMove(List<int[]> emptyCells) {
+        int[] move = findingBestMove(emptyCells, os);
+        return attemptMove(move, os, "Sorry, the computer has won!");
+
+    }
+    
+    private static boolean tryBlockingMove(List<int[]> emptyCells) {
+        int[] move = findingBestMove(emptyCells, xs);
+        return attemptMove(move, os, null);
+    }
+
+    private static void makeRandomMove(List<int[]> emptyCells) {
+        int[] move = emptyCells.get(randomize.nextInt(emptyCells.size()));
+        makeMove(move, os, null);
+    
         if (checkWin(os)) {
             showEndMessage("Sorry, the computer has won!");
 
@@ -138,6 +147,32 @@ public class TicTacToeScene {
 
         }
 
+    }
+
+    private static boolean attemptMove(int[] move, ImageIcon icon, String endMessage) {
+
+        if (move == null) {
+            return false;
+        }
+
+        makeMove(move, icon, endMessage);
+        return true;
+    }
+
+    private static List<int[]> getEmptyCells() {
+        List<int[]> emptyCells = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+
+            for (int j = 0; j < 3; j++) {
+
+                if (clickableGrid[i][j].getIcon() == null) {
+                    emptyCells.add(new int[]{i, j});
+                }
+            }
+        }
+
+        return emptyCells;
     }
 
     private static int[] findingBestMove(List<int[]> emptyCells, ImageIcon testIcon) {
