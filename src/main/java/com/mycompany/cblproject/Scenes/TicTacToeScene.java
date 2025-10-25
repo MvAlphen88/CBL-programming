@@ -91,11 +91,8 @@ public class TicTacToeScene {
             showEndMessage("It's a draw.");
             return;
         }
-
-        new javax.swing.Timer(700, e -> {
-            computerMoves();
-            ((javax.swing.Timer) e.getSource()).stop();
-        }).start();
+        computerMoves();
+        
 
     }
 
