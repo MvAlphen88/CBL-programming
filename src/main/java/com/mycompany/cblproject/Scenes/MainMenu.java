@@ -28,7 +28,7 @@ public class MainMenu {
         JButton button1 = new JButton("Continue");
         button1.addActionListener(e -> {      
             GameMenu.gameMenu();
-            Scene.startNewScene(GameMenu.getMenu());
+            Scene.startNewScene(GameMenu.getMenu(), "Games Menu");
             Scene.getFrame().setVisible(false);
             PetWindow.petWindow();
         });

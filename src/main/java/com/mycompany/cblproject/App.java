@@ -12,6 +12,6 @@ public class App {
     public static void main(String[] args) {
         Scene.createScene();
         MainMenu.mainMenu();
-        Scene.startNewScene(MainMenu.getMenu());
+        Scene.startNewScene(MainMenu.getMenu(), "BIRB");
     }
 }

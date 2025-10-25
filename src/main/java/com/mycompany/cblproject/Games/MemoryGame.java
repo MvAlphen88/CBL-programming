@@ -1,21 +1,24 @@
 package com.mycompany.cblproject.Games;
 
+import com.mycompany.cblproject.Scenes.MemoryScene;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Class that creates the memory game.
+ */
 public class MemoryGame {
-    private final int ROWS = 4;
-    private final int COLUMNS = 4;
-    private final int TOTAL_CARDS = ROWS * COLUMNS;
+    private final int rows = 4;
+    private final int columns = 4;
+    private final int totalCards = rows * columns;
 
     private MemoryCards[] memoryCards;
     private ImageIcon cardBacks;
@@ -30,17 +33,17 @@ public class MemoryGame {
      */
     public JPanel createMemoryGame() {
         loadImages();
-        JPanel gridPanel = new JPanel(new GridLayout(ROWS, COLUMNS, 5, 5)) {
+        JPanel gridPanel = new JPanel(new GridLayout(rows, columns, 5, 5)) {
             @Override
             public Dimension getPreferredSize() {
                 return new Dimension(415, 415);
             }
         };
 
-        memoryCards = new MemoryCards[TOTAL_CARDS];
+        memoryCards = new MemoryCards[totalCards];
         Integer[] cardValues = generateCardValues();
 
-        for (int i = 0; i < TOTAL_CARDS; i++) {
+        for (int i = 0; i < totalCards; i++) {
             int value = cardValues[i];
             ImageIcon frontImage = cardFronts[value - 1]; // Assuming values are 1-based
 
@@ -79,7 +82,7 @@ public class MemoryGame {
 
     private Integer[] generateCardValues() {
         ArrayList<Integer> values = new ArrayList<>();
-        for (int i = 1; i <= TOTAL_CARDS / 2; i++) {
+        for (int i = 1; i <= totalCards / 2; i++) {
             values.add(i);
             values.add(i);
         }
@@ -88,8 +91,14 @@ public class MemoryGame {
     }
 
     private void handleCardClick(int index) {
-        if (isChecking || memoryCards[index].isMatched()) return;
+        if (isChecking || memoryCards[index].isMatched()) {
+            return;
+        }
+        handleCardFlip(index);
+        
+    }
 
+    private void handleCardFlip(int index) {
         MemoryCards clicked = memoryCards[index];
         clicked.showFront();
 
@@ -120,6 +129,7 @@ public class MemoryGame {
 
         if (checkWin()) {
             JOptionPane.showMessageDialog(null, "You matched all the cards!");
+            MemoryScene.resetGame();
         }
     }
 

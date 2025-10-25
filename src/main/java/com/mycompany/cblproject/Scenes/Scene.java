@@ -31,9 +31,10 @@ public class Scene {
      * with a new one.
      * @param newScene The JPanel for the new scene.
      */
-    public static void startNewScene(JPanel newScene) {
+    public static void startNewScene(JPanel newScene, String newSceneTitle) {
         stopCurrentScene();
         frame.add(newScene);
+        setTitle(newSceneTitle);
         frame.revalidate();
         frame.repaint();
         currentScene = newScene;
@@ -47,6 +48,10 @@ public class Scene {
 
     public static JFrame getFrame() {
         return frame;
+    }
+
+    public static void setTitle(String title) {
+        frame.setTitle(title);
     }
 
     /**

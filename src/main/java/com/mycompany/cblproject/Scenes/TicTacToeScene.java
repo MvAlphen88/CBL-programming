@@ -67,7 +67,7 @@ public class TicTacToeScene {
         JPanel bottomPanel = new JPanel(new BorderLayout());
 
         JButton menuButton = new JButton("Return to menu!");
-        menuButton.addActionListener(e -> Scene.startNewScene(GameMenu.getMenu()));
+        menuButton.addActionListener(e -> Scene.startNewScene(GameMenu.getMenu(), "Games Menu"));
         bottomPanel.add(menuButton);
 
         ticTacToePanel.add(bottomPanel, BorderLayout.SOUTH);
