@@ -35,7 +35,7 @@ public class GameMenu {
         MemoryScene.memoryPanel();
         createButtons();
 
-        JPanel buttonsPanel = new JPanel(new GridLayout(2, 2, 10, 10)); 
+        JPanel buttonsPanel = new JPanel(new GridLayout(2, 2, 300, 300)); 
         buttonsPanel.add(buttonMemory);
         buttonsPanel.add(buttonTTT);
         buttonsPanel.add(buttonSit);
