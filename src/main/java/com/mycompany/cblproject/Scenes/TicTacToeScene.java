@@ -30,8 +30,8 @@ public class TicTacToeScene {
         TicTacToeVictoryScene.createVictoryScene();
         ticTacToePanel = new JPanel(new BorderLayout());
 
-        String xPath = "/com/mycompany/resources/Xs_and_Os/redX.png";
-        String oPath = "/com/mycompany/resources/Xs_and_Os/blueO.png";
+        String xPath = "/Xs_and_Os/redX.png";
+        String oPath = "/Xs_and_Os/blueO.png";
 
         ImageIcon rawX = new ImageIcon(TicTacToeScene.class.getResource(xPath));
         ImageIcon rawO = new ImageIcon(TicTacToeScene.class.getResource(oPath));

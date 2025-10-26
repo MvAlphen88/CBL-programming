@@ -19,7 +19,7 @@ public class MemoryVictoryScene {
         victoryScene = new JPanel(new BorderLayout());
 
         ImageIcon backgroundImage = new ImageIcon(
-                "src/main/java/com/mycompany/resources/Menus/memoryVictory.png");
+                MemoryVictoryScene.class.getResource("/Menus/memoryVictory.png"));
         JLabel background = new JLabel(backgroundImage);
         background.setLayout(new BorderLayout());
 

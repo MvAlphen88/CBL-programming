@@ -48,14 +48,14 @@ public class MemoryScene {
         headerPanel.setLayout(new javax.swing.OverlayLayout(headerPanel));
 
         ImageIcon headerIcon = new ImageIcon(
-                "src/main/java/com/mycompany/resources/Menus/memoryBg.png");
+                MemoryScene.class.getResource("/Menus/memoryBg.png"));
         JLabel headerImage = new JLabel(headerIcon);
         headerImage.setBounds(0, 0, headerIcon.getIconWidth(), headerIcon.getIconHeight());
 
         JButton exitButton = new JButton();
 
         exitButton.setIcon(
-                new ImageIcon("src/main/java/com/mycompany/resources/Menus/returnButton.png"));
+                new ImageIcon(MemoryScene.class.getResource("/Menus/returnButton.png")));
         exitButton.setBorderPainted(false);
         exitButton.setContentAreaFilled(false);
         exitButton.setFocusPainted(false);

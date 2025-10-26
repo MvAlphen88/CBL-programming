@@ -45,7 +45,7 @@ public class MemoryGame {
 
         for (int i = 0; i < totalCards; i++) {
             int value = cardValues[i];
-            ImageIcon frontImage = cardFronts[value - 1]; // Assuming values are 1-based
+            ImageIcon frontImage = cardFronts[value - 1]; 
 
             MemoryCards card = new MemoryCards(value, frontImage, cardBacks);
             memoryCards[i] = card;
@@ -60,24 +60,23 @@ public class MemoryGame {
         return gridPanel;
     }
 
-    private void loadImages() {
-        String cardBackPath = "src/main/java/com/mycompany/resources/cardbacks/backs.png";
-        cardBacks = loadAndScaleIcon(cardBackPath, 100, 100);
+    private void loadImages() { 
+        String cardBackPath = "/cardbacks/backs.png"; 
+        cardBacks = loadAndScaleIcon(cardBackPath, 100, 100); 
 
-        cardFronts = new ImageIcon[12];
-        for (int i = 0; i < 12; i++) {
-            String path = "src/main/java/com/mycompany/resources/cards/" + (i + 1) + ".png";
-            cardFronts[i] = loadAndScaleIcon(path, 100, 100);
-
-        }
-
-    }
-
-    private ImageIcon loadAndScaleIcon(String path, int width, int height) {
-        ImageIcon original = new ImageIcon(path);
-        Image scaled = original.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(scaled);
-
+        
+        cardFronts = new ImageIcon[8]; 
+        
+        for (int i = 0; i < 8; i++) { 
+            String path = "/cards/" + (i + 1) + ".png"; 
+            cardFronts[i] = loadAndScaleIcon(path, 100, 100); 
+        } 
+    } 
+        
+    private ImageIcon loadAndScaleIcon(String path, int width, int height) { 
+        ImageIcon original = new ImageIcon(MemoryGame.class.getResource(path)); 
+        Image scaled = original.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH); 
+        return new ImageIcon(scaled); 
     }
 
     private Integer[] generateCardValues() {

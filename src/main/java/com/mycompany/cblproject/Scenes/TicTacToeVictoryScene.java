@@ -51,7 +51,7 @@ public class TicTacToeVictoryScene {
      */
     public static void setImageDefeat() {
         background.setIcon(new ImageIcon(
-                "src/main/java/com/mycompany/resources/Menus/tttDefeat.png"));
+                TicTacToeVictoryScene.class.getResource("/Menus/tttDefeat.png")));
         background.revalidate();
         background.repaint();
     }
@@ -61,7 +61,7 @@ public class TicTacToeVictoryScene {
      */
     public static void setImageDraw() {
         background.setIcon(new ImageIcon(
-                "src/main/java/com/mycompany/resources/Menus/tttDraw.png"));
+                TicTacToeVictoryScene.class.getResource("/Menus/tttDraw.png")));
         background.revalidate();
         background.repaint();
     }
@@ -71,7 +71,7 @@ public class TicTacToeVictoryScene {
      */
     public static void setImageVictory() {
         background.setIcon(new ImageIcon(
-                "src/main/java/com/mycompany/resources/Menus/tttVictory.png"));
+                TicTacToeVictoryScene.class.getResource("/Menus/tttVictory.png")));
         background.revalidate();
         background.repaint();
     }

@@ -83,13 +83,13 @@ public class GameMenu {
 
     private static void changeButtonAppearance() {
         buttonExit.setIcon(
-            new ImageIcon("src/main/java/com/mycompany/resources/Menus/QuitSprite.png"));
+            new ImageIcon(GameMenu.class.getResource("/Menus/QuitSprite.png")));
         buttonMemory.setIcon(
-            new ImageIcon("src/main/java/com/mycompany/resources/Menus/MemorySprite.png"));
+            new ImageIcon(GameMenu.class.getResource("/Menus/MemorySprite.png")));
         buttonTTT.setIcon(
-            new ImageIcon("src/main/java/com/mycompany/resources/Menus/TicTacToeSprite.png"));
+            new ImageIcon(GameMenu.class.getResource("/Menus/TicTacToeSprite.png")));
         buttonSit.setIcon(
-            new ImageIcon("src/main/java/com/mycompany/resources/Menus/RestSprite.png"));
+            new ImageIcon(GameMenu.class.getResource("/Menus/RestSprite.png")));
         
         JButton [] gameMenuButtons = new JButton[4];
         gameMenuButtons[0] = buttonExit;

@@ -20,7 +20,7 @@ public class Scene {
      */
     public static void createScene() {
         frame = new JFrame();
-        ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/resources/programIcon.png");
+        ImageIcon icon = new ImageIcon(Scene.class.getResource("/programIcon.png"));
         frame.setIconImage(icon.getImage());
         frame.setSize(800, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -22,7 +22,7 @@ public class MainMenu {
         menu = new JPanel();
 
         ImageIcon backgroundImage = new ImageIcon(
-            "src/main/java/com/mycompany/resources/Menus/mainMenuBG.png");
+            MainMenu.class.getResource("/Menus/mainMenuBG.png"));
         JLabel background = new JLabel(backgroundImage);
         background.setLayout(new GridBagLayout()); 
 
@@ -31,7 +31,7 @@ public class MainMenu {
 
         JButton buttonStart = new JButton();
         buttonStart.setIcon(new ImageIcon(
-            "src/main/java/com/mycompany/resources/Menus/startButton.png"));
+            MainMenu.class.getResource("/Menus/startButton.png")));
         buttonStart.setBorderPainted(false);;
         buttonStart.setContentAreaFilled(false);
         buttonStart.setFocusPainted(false);
@@ -48,7 +48,7 @@ public class MainMenu {
         JButton buttonQuit = new JButton();
 
         buttonQuit.setIcon(new ImageIcon(
-            "src/main/java/com/mycompany/resources/Menus/exitButton.png"));
+            MainMenu.class.getResource("/Menus/exitButton.png")));
         buttonQuit.setBorderPainted(false);;
         buttonQuit.setContentAreaFilled(false);
         buttonQuit.setFocusPainted(false);

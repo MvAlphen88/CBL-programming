@@ -8,14 +8,14 @@ import javax.swing.ImageIcon;
  */
 public class PetFrames {
     private static ImageIcon[] frames;
-    private static String fileLocation = "src/main/java/com/mycompany/resources/";
+
 
     /**
      * Method that returns the frames for the pets left walkcycle.
      * @return array of ImageIcons containing frames.
      */
     public static ImageIcon[] petWalkLeft() {
-        String animationString = fileLocation + "Bird/WalkLeft/birdwalkcycle";
+        String animationString = "/Bird/WalkLeft/birdwalkcycle";
         loadFrames(27, animationString);
         return frames;
     }
@@ -25,7 +25,7 @@ public class PetFrames {
      * @return array of ImageIcons containing frames.
      */
     public static ImageIcon[] petWalkRight() {
-        String animationString = fileLocation + "Bird/WalkRight/birdwalkcycle";
+        String animationString = "/Bird/WalkRight/birdwalkcycle";
         loadFrames(27, animationString);
         return frames;
     }
@@ -36,7 +36,7 @@ public class PetFrames {
      */
     public static ImageIcon[] petStand() {
         frames = new ImageIcon[1];
-        frames[0] = new ImageIcon(fileLocation + "Bird/Stand/birdstanding.png");
+        frames[0] = new ImageIcon(PetFrames.class.getResource("/Bird/Stand/birdstanding.png"));
         return frames;
     }
 
@@ -45,7 +45,7 @@ public class PetFrames {
      * @return array of ImageIcons containing frames.
      */
     public static ImageIcon[] petSit() {
-        String animationString = fileLocation + "Bird/Sit/birdsitting";
+        String animationString = "/Bird/Sit/birdsitting";
         loadFrames(8, animationString);
         return frames;
     }
@@ -55,7 +55,8 @@ public class PetFrames {
         int currentFrame;
         for (int i = 0; i < framesAmount; i++) {
             currentFrame = i + 1;
-            frames[i] = new ImageIcon(animationString + currentFrame + ".png");
+            frames[i] = new ImageIcon(
+                PetFrames.class.getResource(animationString + currentFrame + ".png"));
         }
     }
 }

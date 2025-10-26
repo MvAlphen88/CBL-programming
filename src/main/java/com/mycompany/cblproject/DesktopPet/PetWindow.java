@@ -35,8 +35,8 @@ public class PetWindow {
     public static void petWindow() {
         pet.setAlwaysOnTop(true);
         pet.setBackground(new Color(0, 0, 0, 0));
-        String imageLocation = "src/main/java/com/mycompany/resources/Bird/Stand/birdstanding.png";
-        petIcon = new ImageIcon(imageLocation);
+        String imageLocation = "/Bird/Stand/birdstanding.png";
+        petIcon = new ImageIcon(PetWindow.class.getResource(imageLocation));
         petImage = new JLabel(petIcon);
         pet.add(petImage);
         pet.pack();
