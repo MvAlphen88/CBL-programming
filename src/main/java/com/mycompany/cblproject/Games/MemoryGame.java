@@ -1,6 +1,7 @@
 package com.mycompany.cblproject.Games;
 
-import com.mycompany.cblproject.Scenes.MemoryScene;
+import com.mycompany.cblproject.Scenes.MemoryVictoryScene;
+import com.mycompany.cblproject.Scenes.Scene;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -128,8 +128,7 @@ public class MemoryGame {
         isChecking = false;
 
         if (checkWin()) {
-            JOptionPane.showMessageDialog(null, "You matched all the cards!");
-            MemoryScene.resetGame();
+            Scene.startNewScene(MemoryVictoryScene.getVictoryPanel(), "Victory");
         }
     }
 

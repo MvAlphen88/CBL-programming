@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -28,6 +27,7 @@ public class TicTacToeScene {
      * Method that creates the panel tic tac toe is played in.
      */
     public static void ticTacToePanel() {
+        TicTacToeVictoryScene.createVictoryScene();
         ticTacToePanel = new JPanel(new BorderLayout());
 
         String xPath = "/com/mycompany/resources/Xs_and_Os/redX.png";
@@ -84,10 +84,12 @@ public class TicTacToeScene {
     
 
         if (checkWin(xs)) {
+            TicTacToeVictoryScene.setImageVictory();
             showEndMessage("You have won!");
             return;
 
         } else if (fullBoard()) {
+            TicTacToeVictoryScene.setImageDraw();
             showEndMessage("It's a draw.");
             return;
         }
@@ -137,9 +139,11 @@ public class TicTacToeScene {
         makeMove(move, os, null);
     
         if (checkWin(os)) {
+            TicTacToeVictoryScene.setImageDefeat();
             showEndMessage("Sorry, the computer has won!");
 
         } else if (fullBoard()) {
+            TicTacToeVictoryScene.setImageDraw();
             showEndMessage("It's a draw!");
 
         }
@@ -200,6 +204,7 @@ public class TicTacToeScene {
         clickableGrid[r][c].setIcon(icon);
 
         if (endMessage != null) {
+            TicTacToeVictoryScene.setImageDefeat();
             showEndMessage(endMessage);
 
         }
@@ -215,9 +220,7 @@ public class TicTacToeScene {
         }
 
        
-        JOptionPane.showMessageDialog(ticTacToePanel,
-            message, "Game over!", 
-            JOptionPane.INFORMATION_MESSAGE);
+        Scene.startNewScene(TicTacToeVictoryScene.getVictoryPanel(), message);
 
         resetGame();
 

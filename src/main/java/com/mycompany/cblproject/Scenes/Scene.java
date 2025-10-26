@@ -2,6 +2,7 @@ package com.mycompany.cblproject.Scenes;
 
 import com.mycompany.cblproject.DesktopPet.PetWindow;
 import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,8 +20,10 @@ public class Scene {
      */
     public static void createScene() {
         frame = new JFrame();
+        ImageIcon icon = new ImageIcon("src/main/java/com/mycompany/resources/programIcon.png");
+        frame.setIconImage(icon.getImage());
         frame.setSize(800, 700);
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true); // 
         frame.setLayout(new BorderLayout());

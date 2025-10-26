@@ -22,6 +22,7 @@ public class MemoryScene {
      * Method that creates the panel containing the memory game.
      */
     public static void memoryPanel() {
+        MemoryVictoryScene.createVictoryScene();
         memoryPanel = new JPanel(new BorderLayout(10, 10));
 
         memoryPanel.add(createHeader(), BorderLayout.NORTH);
